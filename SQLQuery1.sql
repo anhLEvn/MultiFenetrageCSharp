@@ -1,0 +1,1 @@
+﻿alter table Categorie add Description nvarchar(100);

@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBAdherentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adherent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="100" />
+          <Property Name="Prenom" Type="nvarchar" MaxLength="100" />
+          <Property Name="Mail" Type="nvarchar" MaxLength="100" />
+          <Property Name="CategorieId" Type="int" />
+          <Property Name="VilleId" Type="int" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="DateInscription" Type="datetime" />
+          <Property Name="DateNaissance" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="CategorieId" />
+          </Key>
+          <Property Name="CategorieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Libelle" Type="nvarchar" MaxLength="30" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Ville">
+          <Key>
+            <PropertyRef Name="VilleId" />
+          </Key>
+          <Property Name="VilleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Adherent__Catego__49C3F6B7">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+          <End Role="Adherent" Type="Self.Adherent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="CategorieId" />
+            </Principal>
+            <Dependent Role="Adherent">
+              <PropertyRef Name="CategorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adherent__VilleI__5CD6CB2B">
+          <End Role="Ville" Type="Self.Ville" Multiplicity="0..1" />
+          <End Role="Adherent" Type="Self.Adherent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ville">
+              <PropertyRef Name="VilleId" />
+            </Principal>
+            <Dependent Role="Adherent">
+              <PropertyRef Name="VilleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBAdherentsModelStoreContainer">
+          <EntitySet Name="Adherent" EntityType="Self.Adherent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ville" EntityType="Self.Ville" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Adherent__Catego__49C3F6B7" Association="Self.FK__Adherent__Catego__49C3F6B7">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Adherent" EntitySet="Adherent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adherent__VilleI__5CD6CB2B" Association="Self.FK__Adherent__VilleI__5CD6CB2B">
+            <End Role="Ville" EntitySet="Ville" />
+            <End Role="Adherent" EntitySet="Adherent" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBAdherentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adherent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Prenom" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CategorieId" Type="Int32" />
+          <Property Name="VilleId" Type="Int32" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateInscription" Type="DateTime" Precision="3" />
+          <Property Name="DateNaissance" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Categorie" Relationship="Self.FK__Adherent__Catego__49C3F6B7" FromRole="Adherent" ToRole="Categorie" />
+          <NavigationProperty Name="Ville" Relationship="Self.FK__Adherent__VilleI__5CD6CB2B" FromRole="Adherent" ToRole="Ville" />
+        </EntityType>
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="CategorieId" />
+          </Key>
+          <Property Name="CategorieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Libelle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Adherents" Relationship="Self.FK__Adherent__Catego__49C3F6B7" FromRole="Categorie" ToRole="Adherent" />
+        </EntityType>
+        <EntityType Name="Ville">
+          <Key>
+            <PropertyRef Name="VilleId" />
+          </Key>
+          <Property Name="VilleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Adherents" Relationship="Self.FK__Adherent__VilleI__5CD6CB2B" FromRole="Ville" ToRole="Adherent" />
+        </EntityType>
+        <Association Name="FK__Adherent__Catego__49C3F6B7">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+          <End Role="Adherent" Type="Self.Adherent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="CategorieId" />
+            </Principal>
+            <Dependent Role="Adherent">
+              <PropertyRef Name="CategorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Adherent__VilleI__5CD6CB2B">
+          <End Role="Ville" Type="Self.Ville" Multiplicity="0..1" />
+          <End Role="Adherent" Type="Self.Adherent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ville">
+              <PropertyRef Name="VilleId" />
+            </Principal>
+            <Dependent Role="Adherent">
+              <PropertyRef Name="VilleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBAdherentsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adherents" EntityType="Self.Adherent" />
+          <EntitySet Name="Categories" EntityType="Self.Categorie" />
+          <EntitySet Name="Villes" EntityType="Self.Ville" />
+          <AssociationSet Name="FK__Adherent__Catego__49C3F6B7" Association="Self.FK__Adherent__Catego__49C3F6B7">
+            <End Role="Categorie" EntitySet="Categories" />
+            <End Role="Adherent" EntitySet="Adherents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Adherent__VilleI__5CD6CB2B" Association="Self.FK__Adherent__VilleI__5CD6CB2B">
+            <End Role="Ville" EntitySet="Villes" />
+            <End Role="Adherent" EntitySet="Adherents" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBAdherentsModelStoreContainer" CdmEntityContainer="DBAdherentsEntities">
+          <EntitySetMapping Name="Adherents">
+            <EntityTypeMapping TypeName="DBAdherentsModel.Adherent">
+              <MappingFragment StoreEntitySet="Adherent">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="CategorieId" ColumnName="CategorieId" />
+                <ScalarProperty Name="VilleId" ColumnName="VilleId" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="DateInscription" ColumnName="DateInscription" />
+                <ScalarProperty Name="DateNaissance" ColumnName="DateNaissance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="DBAdherentsModel.Categorie">
+              <MappingFragment StoreEntitySet="Categorie">
+                <ScalarProperty Name="CategorieId" ColumnName="CategorieId" />
+                <ScalarProperty Name="Libelle" ColumnName="Libelle" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Villes">
+            <EntityTypeMapping TypeName="DBAdherentsModel.Ville">
+              <MappingFragment StoreEntitySet="Ville">
+                <ScalarProperty Name="VilleId" ColumnName="VilleId" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

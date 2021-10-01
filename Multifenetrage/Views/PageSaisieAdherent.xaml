@@ -1,0 +1,44 @@
+﻿<Page x:Class="Multifenetrage.Views.PageSaisieAdherent"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Multifenetrage.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="425" d:DesignWidth="625"
+      Title="PageSaisieAdherent" Background="#FF6E89D1" Height="425" Width="625">
+
+    <Grid>
+        <TextBlock HorizontalAlignment="Center" Margin="171,10,183,0" TextWrapping="Wrap" 
+                   Text="SAISIE INFO ADHERENT" VerticalAlignment="Top" Height="30" Width="271" TextAlignment="Center" FontSize="18" Foreground="#FF2E3212" FontFamily="Times New Roman"/>
+        <Label Content="Nom" HorizontalAlignment="Left" Margin="7,31,0,0" VerticalAlignment="Top" Height="33" Width="79" Background="{x:Null}" FontSize="16" Foreground="#FFF1F1ED"/>
+        <Label Content="Prénom" HorizontalAlignment="Left" Margin="7,69,0,0" VerticalAlignment="Top" Height="33" Width="79" Background="{x:Null}" FontSize="16" Foreground="#FFF1F1ED"/>
+        <Label Content="Mail" HorizontalAlignment="Left" Margin="7,107,0,0" VerticalAlignment="Top" Height="33" Width="79" Background="{x:Null}" FontSize="16" Foreground="#FFF1F1ED"/>
+        <Label Content="Date naissance" HorizontalAlignment="Left" Margin="5,193,0,0" VerticalAlignment="Top" Height="33" Width="125" Background="{x:Null}" FontSize="16" Foreground="#FFF1F1ED"/>
+        <Label Content="Date inscription" HorizontalAlignment="Left" Margin="7,234,0,0" VerticalAlignment="Top" Height="33" Width="125" Background="{x:Null}" FontSize="16" Foreground="#FFF1F1ED"/>
+        <TextBox HorizontalAlignment="Left" Height="33" Margin="91,31,0,0" TextWrapping="Wrap" 
+                 Text="{Binding Path=AdherentVM.Nom}" VerticalAlignment="Top" Width="193"/>
+        <TextBox HorizontalAlignment="Left" Height="33" Margin="91,69,0,0" 
+                 TextWrapping="Wrap" Text="{Binding Path=AdherentVM.Prenom}" VerticalAlignment="Top" Width="193"/>
+        <TextBox HorizontalAlignment="Left" Height="33" Margin="91,112,0,0" 
+                 TextWrapping="Wrap" Text="{Binding Path=AdherentVM.Mail}" VerticalAlignment="Top" Width="236"/>
+        <DatePicker 
+            HorizontalAlignment="Left" Margin="156,197,0,0" VerticalAlignment="Top"
+            SelectedDate="{Binding Path=AdherentVM.DateNaissance}"
+            />
+        <Calendar HorizontalAlignment="Left" Margin="151,235,0,0" VerticalAlignment="Top"
+                  SelectedDate="{Binding Path=AdherentVM.DateInscription }"
+                  Height="163" Width="176"/>
+        <Label Content="Photo" HorizontalAlignment="Left" Margin="432,31,0,0" VerticalAlignment="Top" Height="33" Width="79" Background="{x:Null}" FontSize="16" Foreground="#FFF1F1ED"/>
+        <Image 
+            Source="{Binding Path=AdherentVM.Photo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            x:Name="imgDef" HorizontalAlignment="Left" Height="162" Margin="398,64,0,0" VerticalAlignment="Top" Width="195" Stretch="Fill"/>
+        <Button Content="Importer photo" HorizontalAlignment="Left" Margin="479,251,0,0" VerticalAlignment="Top" Width="114" Height="22" Click="ImporterImage_Click"/>
+        <Button Content="Enregistrer" HorizontalAlignment="Left" Margin="432,367,0,0" VerticalAlignment="Top" Width="161" Height="31" Click="EnregistrerBase_Click"/>
+        <Label Content="Catégorie" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top" Height="33" Width="125" Background="{x:Null}" FontSize="16" Foreground="#FFF1F1ED"/>
+        <ComboBox ItemsSource="{Binding Path=Categories}" DisplayMemberPath="Libelle" 
+                  SelectedItem="{Binding Path=CategorieVM}"
+                  HorizontalAlignment="Left" Margin="91,157,0,0" VerticalAlignment="Top" Width="208"/>
+
+    </Grid>
+</Page>

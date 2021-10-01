@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="564d9c29c9164e018ca6fca4c420d944" Name="Diagram1">
+        <EntityTypeShape EntityType="DBAdherentsModel.Adherent" Width="1.5" PointX="7.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBAdherentsModel.Categorie" Width="1.5" PointX="2.25" PointY="1.125" />
+        <AssociationConnector Association="DBAdherentsModel.FK__Adherent__Catego__49C3F6B7" />
+        <EntityTypeShape EntityType="DBAdherentsModel.Ville" Width="1.5" PointX="0.75" PointY="3.875" />
+        <AssociationConnector Association="DBAdherentsModel.FK__Adherent__VilleI__571DF1D5" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
